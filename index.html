@@ -37,7 +37,7 @@
 					(rq.responseText).match(/[0-9]/g).forEach(function(e){r+=e});
 
 					console.log(`${user}\'s messages:${r}`);
-					if(old!=r){if(old!=''){se.play();}old=r;}
+					if(old!=r){if(old!=null){se.play();}old=r;}
 					display.innerText=`${user}\'s messages:${r}`;
 
 				}
@@ -58,7 +58,7 @@
 	
 	<body onload="init()">
 		<center>
-			<h1>Show Scratcher Messages - SSM v2.0</h1>
+			<h1>Show Scratcher Messages - SSM v2.1</h1>
 			UserName:<input type="text" id="txt" value="">
 			<input type="button" value="done" onclick="start();">
 
