@@ -4,9 +4,11 @@
 		<title>Show Scratcher Messages</title>
 	<script>
 
-		var display,mov;
-		var flag=false;
+		var display,mov,first,old;
 		var str='Setting...';
+		var se=new Audio();
+		se.src='pupse.mp3';
+		var flag=false;
 		
 		function init(){
 			display=document.getElementById('display');
@@ -15,9 +17,7 @@
 
 		
 		function start(){
-
 			user=document.getElementById('txt').value;
-
 			mov.innerText='';
 			str='Getting...';
 			flag=true;
@@ -37,6 +37,7 @@
 					(rq.responseText).match(/[0-9]/g).forEach(function(e){r+=e});
 
 					console.log(`${user}\'s messages:${r}`);
+					if(old!=r){if(old!=''){se.play();}old=r;}
 					display.innerText=`${user}\'s messages:${r}`;
 
 				}
