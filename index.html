@@ -1,83 +1,73 @@
 <html>
-
 	<head>
 		<title>OSM v2.3.8 by YKW</title>
 		<link rel="shortcut icon" href="code040fixfix.png">
 	<script>
+		var display,mov,first,old,yet;
 
-		var display,mov,first,old;
 		var str='Setting...';
 		var plus=new Audio();
-		var minus=new Audio()
+		var minus=new Audio();
+		var prime=new Audio();
 		plus.src='plus.mp3';
-		minus.src='minus.mp3'
+		minus.src='minus.mp3';
+		prime.src='nc156168.mp3';
 		var flag=false;
-		
+		isPrime=num=>{i=0;if(num%2==1&&num>1){for(i=2;num%i!=0;i++){console.log(0)}}return i==num||num==2};
+	
+
+	
 		function init(){
 			display=document.getElementById('display');
 			mov=document.getElementById('mov');
 		}
 
-		
 		function start(){
 			user=document.getElementById('txt').value;
 			mov.innerText='';
 			str='Getting...';
+			yet=true;
 			old=null;
 			flag=true;
 		}
-
 		setInterval(function(){
-
 			if(flag){
 				set=user=>`https://api.scratch.mit.edu/users/${user}/messages/count`;
-
 				rq=new XMLHttpRequest();
 				rq.open('GET',set(user),false);rq.send(null);
-
 				if(rq.readyState==4&&rq.status==200){
-
 					r='';
 					(rq.responseText).match(/[0-9]/g).forEach(function(e){r+=e});
-
 					console.log(`${user}\'s messages:${r}`);
-					if(old!=r){if(old!=null){old<r?plus.play():minus.play();}old=r;}
+					if(isPrime(r)&&yet){prime.play();yet=false;}
+					if(old!=r){if(old!=null){old<r?plus.play():minus.play();}old=r;yet=ture;}
 					display.innerText=`${user}\'s messages:${r}`;
-
 				}
-			
-}
+			}
 			mov.innerText=str.substr(0,mov.innerText.length%(str.length)+1);
 		},500);
-	</script>
-
+</script>
 	<style>
 		body{
-			color:#fafafa;
-			background: linear-gradient(-90deg, #FFC342, #FFCD41, #FFEF41);
+		color:#fafafa;
+		background: linear-gradient(-90deg, #FFC342, #FFCD41, #FFEF41);
 		}
-		
 		a:link{color: #3FFAFF;}
 		a:visited{color:#3188C6;}
 		a:hover{color:#FFF054;}
 		a:active{color:#FF8223;}
 	</style>
+</head>
 
-	</head>
-	
-	<body onload="init()">
-		<center>
-			<h1>Ontime Scratchers Messages - OSM v2.3.8</h1>
-			UserName:<input type="text" id="txt" value="">
-			<input type="button" value="done" onclick="start();">
-
-			<h1 id='display'>NONAME's messages:0</h1>
-			<h1 id="mov"></h1><br><br>
-			
-			<img src="code040fixfix.png" onclick="window.open('https://scratch.mit.edu/users/youkaiwatch')"></img><br>
-			&spades; It works by <a href="https://scratch.mit.edu/users/youkaiwatch" target="_blank">YKW</a>
-		</center>
-	</body>
-
-
+<body onload="init()">
+	<center>
+		<h1>Ontime Scratchers Messages - OSM v2.3.8</h1>
+		UserName:<input type="text" id="txt" value="">
+		<input type="button" value="done" onclick="start();">
+		<h1 id='display'>NONAME's messages:0</h1>
+		<h1 id="mov"></h1><br><br>
+		<img src="code040fixfix.png" onclick="window.open('https://scratch.mit.edu/users/youkaiwatch')"></img><br>
+		&spades; It works by <a href="https://scratch.mit.edu/users/youkaiwatch" target="_blank">YKW</a>
+	</center>
+</body>
 </html>
