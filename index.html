@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>OSM v2.5.1 by YKW</title>
+		<title>OSM v2.5.3 by YKW</title>
 		<link rel="shortcut icon" href="code040fixfix.png">
 	<script>
 		var display,mov,first,old,yet,uicon;
@@ -13,7 +13,7 @@
 		minus.src='minus.mp3';
 		prime.src='nc156168.mp3';
 		var flag=false;
-		isPrime=num=>{i=0;if(num%2==1&&num>1){for(i=2;num%i!=0;i++){console.log(0)}}return i==num||num==2};
+		isPrime=num=>{i=0;if(num%2==1&&num>1){for(i=2;num%i!=0;i++){console.log(0)}}return (i==num||num==2)&&num!=0};
 	
 
 	
@@ -50,7 +50,7 @@
 					(rq.responseText).match(/[0-9]/g).forEach(function(e){r+=e});
 					console.log(`${user}\'s messages:${r}`);
 					if(isPrime(r)&&yet){prime.play();yet=false;}
-					if(old!=r){if(old!=null){old<r?plus.play():minus.play();}old=r;yet=ture;}
+					if(old!=r){if(old!=null){old<r?plus.play():minus.play();}old=r;yet=true;}
 					display.innerText=`${user}\'s messages:${r}`;
 				}
 			}
@@ -71,12 +71,12 @@
 
 <body onload="init()">
 	<center>
-		<h1>Ontime Scratchers Messages - OSM v2.5.1</h1>
+		<h1>Ontime Scratchers Messages - OSM v2.5.3</h1>
 		UserName:<input type="text" id="txt" value="">
 		<input type="button" value="done" onclick="start();"><br><br>
-		<img src='noImage.png' id='usericon'></img><br>
+		<img src='noImage.png' id='usericon' width="128px" height="128px"></img><br>
 		<h1 id='display'>NONAME's messages:0</h1>
-		<h1 id="mov"></h1><br><br>
+		<h1 id="mov">-</h1><br>
 		<img src="code040fixfix.png" onclick="window.open('https://scratch.mit.edu/users/youkaiwatch')"></img><br>
 		&spades; It works by <a href="https://scratch.mit.edu/users/youkaiwatch" target="_blank">YKW</a>
 	</center>
