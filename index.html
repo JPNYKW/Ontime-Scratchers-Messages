@@ -1,9 +1,9 @@
 <html>
 	<head>
-		<title>OSM v2.4.1 by YKW</title>
+		<title>OSM v2.5.1 by YKW</title>
 		<link rel="shortcut icon" href="code040fixfix.png">
 	<script>
-		var display,mov,first,old,yet;
+		var display,mov,first,old,yet,uicon;
 
 		var str='Setting...';
 		var plus=new Audio();
@@ -23,13 +23,23 @@
 		}
 
 		function start(){
+			uicon=document.getElementById('usericon');
 			user=document.getElementById('txt').value;
+			uicon.src=getIcon(user);
 			mov.innerText='';
 			str='Getting...';
 			yet=true;
 			old=null;
 			flag=true;
 		}
+		
+		icon=ID=>{return `https://cdn2.scratch.mit.edu/get_image/user/${ID}_128x128.png`};
+		function getIcon(user){
+			rq=new XMLHttpRequest();
+			rq.open('GET',`https://api.scratch.mit.edu/users/${user}`,false);
+			rq.send(null);
+			if(rq.status==200){return icon(rq.responseText.split(/\D+/g)[1]);}}
+		
 		setInterval(function(){
 			if(flag){
 				set=user=>`https://api.scratch.mit.edu/users/${user}/messages/count`;
@@ -61,9 +71,10 @@
 
 <body onload="init()">
 	<center>
-		<h1>Ontime Scratchers Messages - OSM v2.4.1</h1>
+		<h1>Ontime Scratchers Messages - OSM v2.5.1</h1>
 		UserName:<input type="text" id="txt" value="">
-		<input type="button" value="done" onclick="start();">
+		<input type="button" value="done" onclick="start();"><br>
+		<img src='noImage.png' id='usericon'></img><br>
 		<h1 id='display'>NONAME's messages:0</h1>
 		<h1 id="mov"></h1><br><br>
 		<img src="code040fixfix.png" onclick="window.open('https://scratch.mit.edu/users/youkaiwatch')"></img><br>
