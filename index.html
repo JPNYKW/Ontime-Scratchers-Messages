@@ -14,9 +14,7 @@
 		prime.src='nc156168.mp3';
 		var flag=false;
 		isPrime=num=>{i=0;if(num%2==1&&num>1){for(i=2;num%i!=0;i++){console.log(0)}}return (i==num||num==2)&&num!=0};
-	
-
-	
+		
 		function init(){
 			display=document.getElementById('display');
 			mov=document.getElementById('mov');
@@ -25,7 +23,7 @@
 		function start(){
 			uicon=document.getElementById('usericon');
 			user=document.getElementById('txt').value;
-			uicon.src=getIcon(user);
+			if(user!=null&&user!='')uicon.src=getIcon(user);
 			mov.innerText='';
 			str='Getting...';
 			yet=true;
@@ -38,7 +36,7 @@
 			rq=new XMLHttpRequest();
 			rq.open('GET',`https://api.scratch.mit.edu/users/${user}`,false);
 			rq.send(null);
-			if(rq.status==200){return icon(rq.responseText.split(/\D+/g)[1]);}}
+			if(rq.readyState==4&&rq.status==200){return icon(rq.responseText.split(/\D+/g)[1]);}}
 		
 		setInterval(function(){
 			if(flag){
