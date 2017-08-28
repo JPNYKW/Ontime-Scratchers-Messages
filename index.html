@@ -43,7 +43,8 @@
 			rq.open('GET',`https://api.scratch.mit.edu/users/${user}`,false); // ユーザーAPIからデータを取得
 			rq.send(null); // 空データを送信して戻り値を取得
 			if(rq.readyState==4&&rq.status==200){return icon(rq.responseText.split(/\D+/g)[1]);}}
-			/* ここのコードは少し複雑なので、多少長めに解説します
+			/*
+			// ここのコードは少し複雑なので、多少長めに解説します
 			// まず、rq.readyState==4&&rq.status==200はデータが正常に取得できたかを判定します
 			// 取得できたらicon(rq.responseText.split(/\D+/g)[1])を返します
 			// icon()は()内に入力されたIDのユーザーデータを取得するAPI関数です
