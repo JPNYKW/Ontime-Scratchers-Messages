@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>OSM v2.5.3 by YKW</title>
+		<title>OSM v2.5.7 by YKW</title>
 		<link rel="shortcut icon" href="code040fixfix.png">
 	<script>
 		/*
@@ -42,17 +42,8 @@
 			rq=new XMLHttpRequest(); // XMLHttpRequestを作成
 			rq.open('GET',`https://api.scratch.mit.edu/users/${user}`,false); // ユーザーAPIからデータを取得
 			rq.send(null); // 空データを送信して戻り値を取得
-			if(rq.readyState==4&&rq.status==200){return icon(rq.responseText.split(/\D+/g)[1]);}}
-			/*
-			// ここのコードは少し複雑なので、多少長めに解説します
-			// まず、rq.readyState==4&&rq.status==200はデータが正常に取得できたかを判定します
-			// 取得できたらicon(rq.responseText.split(/\D+/g)[1])を返します
-			// icon()は()内に入力されたIDのユーザーデータを取得するAPI関数です
-			// ()内のrq.responseText.split(/\D+/g)[1]は
-			// ユーザー情報の中に含まれる「連続する数字」を配列に分ける正規表現で
-			// 2番目（インデックスは1）がIDにあたるので、[1]でIDを取得しています
-			// 結果的に()内にはIDが入力されている事になります
-			*/
+			if(rq.readyState==4&&rq.status==200){return icon(JSON.parse(rq.responseText).id)}}
+			// JSONを利用してAPIの戻り値からidを取得
 		
 		setInterval(function(){ // setIntervalは一定の間隔で繰り返す動作です
 			if(flag){
@@ -60,9 +51,7 @@
 				rq=new XMLHttpRequest();
 				rq.open('GET',set(user),false);rq.send(null);
 				if(rq.readyState==4&&rq.status==200){
-					r='';
-					(rq.responseText).match(/[0-9]/g).forEach(function(e){r+=e});
-					// 上記のコードも、先ほどと同様に正規表現を利用して取得しています
+					r=JSON.parse(rq.responseText).count; // JSONを利用してAPIの戻り値からcountを取得
 					console.log(`${user}\'s messages:${r}`);
 					// console.logはデバッグ用です
 					if(isPrime(r)&&yet){prime.play();yet=false;} // 素数ならすっご～いを鳴らす
@@ -88,7 +77,7 @@
 
 <body onload="init()">
 	<center>
-		<h1>Ontime Scratchers Messages - OSM v2.5.3</h1>
+		<h1>Ontime Scratchers Messages - OSM v2.5.7</h1>
 		UserName:<input type="text" id="txt" value="">
 		<input type="button" value="done" onclick="start();"><br><br>
 		<img src='noImage.png' id='usericon' width="128px" height="128px"></img><br>
