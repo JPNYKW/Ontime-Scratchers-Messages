@@ -37,7 +37,7 @@
 			flag=true;
 		}
 		
-		icon=ID=>{return `https://cdn2.scratch.mit.edu/get_image/user/${ID}_128x128.png`}; // IDを挿入したapiリンクを返す関数
+		icon=ID=>{return `https://cdn2.scratch.mit.edu/get_image/user/${ID}_128x128.png`}; // IDを挿入したAPIリンクを返す関数
 		function getIcon(user){ // アイコンのURLを戻り値とする関数です
 			rq=new XMLHttpRequest(); // XMLHttpRequestを作成
 			rq.open('GET',`https://api.scratch.mit.edu/users/${user}`,false); // ユーザーAPIからデータを取得
@@ -48,7 +48,7 @@
 			// 取得できたらicon(rq.responseText.split(/\D+/g)[1])を返します
 			// icon()は()内に入力されたIDのユーザーデータを取得するAPI関数です
 			// ()内のrq.responseText.split(/\D+/g)[1]は
-			// ユーザー情報野中に含まれる「連続する数字」を配列に分ける正規表現で
+			// ユーザー情報の中に含まれる「連続する数字」を配列に分ける正規表現で
 			// 2番目（インデックスは1）がIDにあたるので、[1]でIDを取得しています
 			// 結果的に()内にはIDが入力されている事になります
 			*/
